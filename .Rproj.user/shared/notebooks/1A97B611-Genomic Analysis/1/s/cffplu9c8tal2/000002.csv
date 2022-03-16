@@ -1,0 +1,8 @@
+"0","# Primary"
+"0","primary.coloss.del <- lossRank(primary.coloss)"
+"0","primary.coloss.del <- primary.coloss.del[,c(1,5)]"
+"0","colnames(primary.coloss.del)[2] <- ""Deletion rate: Primary coloss patients"""
+"0","# Metastatic"
+"0","met.coloss.del <- lossRank(met.coloss)"
+"0","met.coloss.del <- met.coloss.del[,c(1,5)]"
+"0","colnames(met.coloss.del)[2] <- ""Deletion rate: Metastatic coloss patients"""

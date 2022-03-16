@@ -1,0 +1,8 @@
+"0","# Primary"
+"0","primary.WT.amp <- gainRank(primary.WT)"
+"0","primary.WT.amp <- primary.WT.amp[,c(1,5)]"
+"0","colnames(primary.WT.amp)[2] <- ""Amplification rate: Primary WT patients"""
+"0","# Metastatic"
+"0","met.WT.amp <- gainRank(met.WT)"
+"0","met.WT.amp <- met.WT.amp[,c(1,5)]"
+"0","colnames(met.WT.amp)[2] <- ""Amplification rate: Metastatic WT patients"""

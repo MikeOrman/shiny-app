@@ -1,0 +1,3 @@
+"0","deletions <- merge.data.frame(primary.WT.del, primary.coloss.del)"
+"0","deletions <- merge.data.frame(deletions, met.WT.del)"
+"0","deletions <- merge.data.frame(deletions, met.coloss.del)"

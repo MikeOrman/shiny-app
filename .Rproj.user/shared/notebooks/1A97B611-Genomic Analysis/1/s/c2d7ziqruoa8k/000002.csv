@@ -1,0 +1,8 @@
+"0","# Primary"
+"0","primary.coloss.amp <- gainRank(primary.coloss)"
+"0","primary.coloss.amp <- primary.coloss.amp[,c(1,5)]"
+"0","colnames(primary.coloss.amp)[2] <- ""Amplification rate: Primary coloss patients"""
+"0","# Metastatic"
+"0","met.coloss.amp <- gainRank(met.coloss)"
+"0","met.coloss.amp <- met.coloss.amp[,c(1,5)]"
+"0","colnames(met.coloss.amp)[2] <- ""Amplification rate: Metastatic coloss patients"""

@@ -1,0 +1,8 @@
+"0","# Set cutoff"
+"0","cutoff <- 0.02"
+"0","# Filter deletions"
+"0","index.del.C2 <- (abs(deletions$`Deletion rate: Metastatic WT patients`-deletions$`Deletion rate: Primary WT patients`) <= cutoff)"
+"0","del.C2.genes <- deletions$Hugo_Symbol[index.del.C2]"
+"0","# Filter ampplifications"
+"0","index.amp.C2 <- ((abs(amplifications$`Amplification rate: Metastatic WT patients`- amplifications$`Amplification rate: Primary WT patients`)) <= cutoff)"
+"0","amp.C2.genes <- amplifications$Hugo_Symbol[index.amp.C2]"

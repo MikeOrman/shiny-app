@@ -1,0 +1,16 @@
+"0","# TCGA"
+"2","Warning message:
+"
+"2","R graphics engine version 14 is not supported by this version of RStudio. The Plots tab will be disabled until a newer version of RStudio is installed. 
+"
+"0","TCGA <- read.table(""TCGA_data.txt"", check.names = FALSE, sep = ""\t"")"
+"0","TCGA <- as.data.frame(TCGA)"
+"0","# Taylor"
+"0","Taylor <- read.table(""Taylor_data.txt"", check.names = FALSE, sep = ""\t"")"
+"0","Taylor <- as.data.frame(Taylor)"
+"0","# Baca"
+"0","Baca <- read.table(""Baca_data.txt"", check.names = FALSE, sep = ""\t"")"
+"0","Baca <- as.data.frame(Baca)"
+"0","# Abida"
+"0","Abida <- read.table(""Abida_data.txt"", check.names = FALSE, sep = ""\t"")"
+"0","Abida <- as.data.frame(Abida)"

@@ -1,0 +1,6 @@
+"0","# Primary"
+"0","primary.coloss <- subtype_subset(subtype_subset(primary, c(""MAP3K7"", ""loss"")), c(""CHD1"", ""loss""))"
+"0","primary.WT <- subtype_subset(subtype_subset(primary, c(""MAP3K7"", ""WT/gain"")), c(""CHD1"", ""WT/gain""))"
+"0","# Metastatic"
+"0","met.coloss <- subtype_subset(subtype_subset(met, c(""MAP3K7"", ""loss"")), c(""CHD1"", ""loss""))"
+"0","met.WT <- subtype_subset(subtype_subset(met, c(""MAP3K7"", ""WT/gain"")), c(""CHD1"", ""WT/gain""))"

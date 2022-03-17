@@ -1,4 +1,0 @@
-"0","if (length(genes) > 0){"
-"0","  # Metastatic subtype : Primary Subtype"
-"0","  amp.enrichment <- concurrent.gain.data(met.coloss, primary.coloss)"
-"0","}"

@@ -1,4 +1,0 @@
-"0","# Determine FDR cutoff for enrichment in metastatic subtype"
-"0","metastatic <- -log10(summary$pval)"
-"0","hist(metastatic, breaks = seq(0, 3, by = 0.05),"
-"0","     xlab = ""-log10 pval"", ylab = ""Number of genes"", main = ""Met:Primary Subtype Enrichment"")"

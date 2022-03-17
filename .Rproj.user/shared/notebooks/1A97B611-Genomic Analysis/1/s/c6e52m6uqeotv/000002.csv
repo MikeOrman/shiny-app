@@ -1,8 +1,0 @@
-"0","# Primary"
-"0","primary.WT.del <- lossRank(primary.WT)"
-"0","primary.WT.del <- primary.WT.del[,c(1,5)]"
-"0","colnames(primary.WT.del)[2] <- ""Deletion rate: Primary WT patients"""
-"0","# Metastatic"
-"0","met.WT.del <- lossRank(met.WT)"
-"0","met.WT.del <- met.WT.del[,c(1,5)]"
-"0","colnames(met.WT.del)[2] <- ""Deletion rate: Metastatic WT patients"""

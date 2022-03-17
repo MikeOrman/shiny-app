@@ -1,2 +1,0 @@
-"0","index.amp.C1 <- (amplifications$`Amplification rate: Primary coloss patients` > amplifications$`Amplification rate: Primary WT patients`)"
-"0","amp.C1.genes <- amplifications$Hugo_Symbol[index.amp.C1]"

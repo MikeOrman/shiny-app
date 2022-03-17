@@ -62,6 +62,11 @@ primary.WT <- subtype_subset(subtype_subset(primary, c("MAP3K7", "WT/gain")), c(
 met.coloss <- subtype_subset(subtype_subset(met, c("MAP3K7", "loss")), c("CHD1", "loss"))
 met.WT <- subtype_subset(subtype_subset(met, c("MAP3K7", "WT/gain")), c("CHD1", "WT/gain"))
 ```
+# Compute subtype-specific metastatic regulator enrichment
+```{r}
+del.enrichment <- concurrent.loss.data(met.coloss, primary.coloss)
+amp.enrichment <- concurrent.loss.data(met.coloss, primary.coloss)
+```
 # Compute alteration rates
 Compute deletion rates in subtype patients
 ```{r}
@@ -151,7 +156,7 @@ for (i in seq(.2, 1e-5, length.out = 20)){
 colnames(C2.table) <- c("WT Alteration Ratio Difference: |Met - Primary|", "Genes Remaining")
 library(DT)
 ggplot(data = C2.table, aes(`WT Alteration Ratio Difference: |Met - Primary|`, `Genes Remaining`)) + geom_point() + xlab("Constraint 2 Cutoff")
-print("A C2 cutoff of <= 2% captures ~3500 genes that remain for analysis as subtype-specific metastatic regulators")
+print("A C2 cutoff of <= 2% captures ~3000 genes that remain for analysis as subtype-specific metastatic regulators")
 ```
 Apply C2 cutoff
 ```{r}
@@ -163,121 +168,6 @@ del.C2.genes <- deletions$Hugo_Symbol[index.del.C2]
 # Filter ampplifications
 index.amp.C2 <- ((abs(amplifications$`Amplification rate: Metastatic WT patients`- amplifications$`Amplification rate: Primary WT patients`)) <= cutoff)
 amp.C2.genes <- amplifications$Hugo_Symbol[index.amp.C2]
-```
-# Compute Enrichment
-### Compute deletion enrichment
-Subset subtype and WT patients
-```{r}
-# Primary
-primary.coloss <- subtype_subset(subtype_subset(primary, c("MAP3K7", "loss")), c("CHD1", "loss"))
-primary.WT <- subtype_subset(subtype_subset(primary, c("MAP3K7", "WT/gain")), c("CHD1", "WT/gain"))
-# Metastatic
-met.coloss <- subtype_subset(subtype_subset(met, c("MAP3K7", "loss")), c("CHD1", "loss"))
-met.WT <- subtype_subset(subtype_subset(met, c("MAP3K7", "WT/gain")), c("CHD1", "WT/gain"))
-```
-Filter CNA profiles for deletions meeting Constraints 1-2
-```{r}
-genes <- intersect(del.C1.genes, del.C2.genes)
-# Filter primary subtype patients
-primary.coloss.index <- c()
-for (i in 1:nrow(primary.coloss)){
-  if (sum(primary.coloss$Hugo_Symbol[i] == genes) == 1)
-  {primary.coloss.index[i] = TRUE}
-  if (sum(primary.coloss$Hugo_Symbol[i] == genes) == 0)
-  {primary.coloss.index[i] = FALSE}
-}
-primary.coloss <- primary.coloss[primary.coloss.index,]
-# Filter primary WT patients
-primary.WT.index <- c()
-for (i in 1:nrow(primary.WT)){
-  if (sum(primary.WT$Hugo_Symbol[i] == genes) == 1)
-  {primary.WT.index[i] = TRUE}
-  if (sum(primary.WT$Hugo_Symbol[i] == genes) == 0)
-  {primary.WT.index[i] = FALSE}
-}
-primary.WT <- primary.WT[primary.WT.index,]
-# Filter metastatic subtype patients
-met.coloss.index <- c()
-for (i in 1:nrow(met.coloss)){
-  if (sum(met.coloss$Hugo_Symbol[i] == genes) == 1)
-  {met.coloss.index[i] = TRUE}
-  if (sum(met.coloss$Hugo_Symbol[i] == genes) == 0)
-  {met.coloss.index[i] = FALSE}
-}
-met.coloss <- met.coloss[met.coloss.index,]
-# Filter metastatic WT patients
-met.WT.index <- c()
-for (i in 1:nrow(met.WT)){
-  if (sum(met.WT$Hugo_Symbol[i] == genes) == 1)
-  {met.WT.index[i] = TRUE}
-  if (sum(met.WT$Hugo_Symbol[i] == genes) == 0)
-  {met.WT.index[i] = FALSE}
-}
-met.WT <- met.WT[met.WT.index,]
-```
-Compute deletion enrichment
-```{r}
-if (length(genes) > 0){
-  # Metastatic subtype : Primary subtype
-  del.enrichment <- concurrent.loss.data(met.coloss, primary.coloss)
-}
-```
-### Compute amplification enrichment
-Subset subtype and WT patients
-```{r}
-# Primary
-primary.coloss <- subtype_subset(subtype_subset(primary, c("MAP3K7", "loss")), c("CHD1", "loss"))
-primary.WT <- subtype_subset(subtype_subset(primary, c("MAP3K7", "WT/gain")), c("CHD1", "WT/gain"))
-# Metastatic
-met.coloss <- subtype_subset(subtype_subset(met, c("MAP3K7", "loss")), c("CHD1", "loss"))
-met.WT <- subtype_subset(subtype_subset(met, c("MAP3K7", "WT/gain")), c("CHD1", "WT/gain"))
-```
-Filter CNA profiles for amplifications meeting Constraints 1-2
-```{r}
-genes <- intersect(amp.C1.genes, amp.C2.genes)
-# Filter primary subtype patients
-primary.coloss.index <- c()
-for (i in 1:nrow(primary.coloss)){
-  if (sum(primary.coloss$Hugo_Symbol[i] == genes) == 1)
-  {primary.coloss.index[i] = TRUE}
-  if (sum(primary.coloss$Hugo_Symbol[i] == genes) == 0)
-  {primary.coloss.index[i] = FALSE}
-}
-primary.coloss <- primary.coloss[primary.coloss.index,]
-# Filter primary WT patients
-primary.WT.index <- c()
-for (i in 1:nrow(primary.WT)){
-  if (sum(primary.WT$Hugo_Symbol[i] == genes) == 1)
-  {primary.WT.index[i] = TRUE}
-  if (sum(primary.WT$Hugo_Symbol[i] == genes) == 0)
-  {primary.WT.index[i] = FALSE}
-}
-primary.WT <- primary.WT[primary.WT.index,]
-# Filter metastatic subtype patients
-met.coloss.index <- c()
-for (i in 1:nrow(met.coloss)){
-  if (sum(met.coloss$Hugo_Symbol[i] == genes) == 1)
-  {met.coloss.index[i] = TRUE}
-  if (sum(met.coloss$Hugo_Symbol[i] == genes) == 0)
-  {met.coloss.index[i] = FALSE}
-}
-met.coloss <- met.coloss[met.coloss.index,]
-# Filter metastatic WT patients
-met.WT.index <- c()
-for (i in 1:nrow(met.WT)){
-  if (sum(met.WT$Hugo_Symbol[i] == genes) == 1)
-  {met.WT.index[i] = TRUE}
-  if (sum(met.WT$Hugo_Symbol[i] == genes) == 0)
-  {met.WT.index[i] = FALSE}
-}
-met.WT <- met.WT[met.WT.index,]
-```
-Compute amplification enrichment
-```{r}
-if (length(genes) > 0){
-  # Metastatic subtype : Primary Subtype
-  amp.enrichment <- concurrent.gain.data(met.coloss, primary.coloss)
-}
 ```
 # Report ranked alterations
 Assign alteration status
@@ -301,7 +191,6 @@ if (length(deleted) > 0){
     deleted[i,3] <- met.coloss.del[index1, 2] - primary.coloss.del[index2, 2]
     deleted[i,4] <- del.enrichment[index3, 9]
   }
-  #deleted[,4] <- p.adjust(deleted[,4], method = "fdr")
 colnames(deleted) <- c("Hugo Symbol", "Alteration", "Subtype Alteration Ratio Difference (Met - Primary)","pval")
 }
 # Construct alteration table for genes that are amplified
@@ -315,7 +204,6 @@ if (length(amplified) >0){
     amplified[i,3] <- met.coloss.amp[index1, 2] - primary.coloss.amp[index2, 2]
     amplified[i,4] <- amp.enrichment[index3, 9]
   }
-  #amplified[,4] <- p.adjust(amplified[,4], method = "fdr")
 colnames(amplified) <- c("Hugo Symbol", "Alteration", "Subtype Alteration Ratio Difference (Met - Primary)","pval")
 }
 # Construct alteration table for genes that are deleted and amplified. Report the average change in alteration and the combined p-val.
@@ -369,9 +257,9 @@ datatable(summary)
 ```
 p-value distribution
 ```{r}
-metastatic <- -log10(summary$pval)
-hist(metastatic, breaks = seq(0, 3, by = 0.05),
-     xlab = "-log10 pval", ylab = "Number of genes", main = "Met:Primary Subtype Enrichment")
+metastatic <- summary$pval
+hist(metastatic, breaks = seq(0, 1, by = 0.05),
+     xlab = "p value", ylab = "Number of genes", main = "Met:Primary Subtype Enrichment")
 ```
 Order summary table by difference in alteration ratio
 ```{r}

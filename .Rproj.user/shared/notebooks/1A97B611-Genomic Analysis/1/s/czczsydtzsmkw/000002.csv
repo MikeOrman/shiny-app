@@ -1,5 +1,0 @@
-"0","filtered.deletions <- intersect(del.C1.genes, del.C2.genes)"
-"0","filtered.amplifications <- intersect(amp.C1.genes, amp.C2.genes)"
-"0","deleted <- setdiff(filtered.deletions, filtered.amplifications)"
-"0","amplified <- setdiff(filtered.amplifications, filtered.deletions)"
-"0","both <- intersect(filtered.deletions, filtered.amplifications)"

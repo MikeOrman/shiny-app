@@ -1,4 +1,0 @@
-"0","if (length(genes) > 0){"
-"0","  # Metastatic subtype : Primary subtype"
-"0","  del.enrichment <- concurrent.loss.data(met.coloss, primary.coloss)"
-"0","}"

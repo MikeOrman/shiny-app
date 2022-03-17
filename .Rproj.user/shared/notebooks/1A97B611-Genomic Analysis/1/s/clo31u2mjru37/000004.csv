@@ -1,2 +1,0 @@
-"0","# Plot ranked summary data"
-"0","ggplot(data = summary, mapping = aes(`Gene Rank`, `Subtype Alteration Ratio Difference (Met - Primary)`, label = `Hugo Symbol`)) + geom_point() + ggtitle(""Alteration Frequency Difference: Met - Primary"") + ylim(-.4,.4) + geom_text_repel(data = subset(summary, `Gene Rank` <= 2 | `Gene Rank` >= 3044), nudge_x = 0, nudge_y = -.165)"

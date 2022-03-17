@@ -1,2 +1,0 @@
-"0","index.del.C1 <- (deletions$`Deletion rate: Primary coloss patients` > deletions$`Deletion rate: Primary WT patients`)"
-"0","del.C1.genes <- deletions$Hugo_Symbol[index.del.C1]"

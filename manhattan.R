@@ -14,8 +14,8 @@ manhattan.object <- function(input){
   #Map Entrez Gene ID to HGNC Symbols in main dataframe
   for (i in 1:nrow(main)){
     index = as.numeric(which(main[i,1] == mapped_HGNC$symbol))
-    if (length(index) == 1)
-    {main[i,3] <- mapped_HGNC$gene_id[index]}
+    if (length(index) >= 1)
+    {main[i,3] <- mapped_HGNC$gene_id[index][1]}
     else {main[i,3] <- NA}
   }
   colnames(main) <- c("Hugo_Symbol", "pval", "Gene ID")
@@ -25,8 +25,8 @@ manhattan.object <- function(input){
   #Map Entrez Gene ID to Chromosome Number in main dataframe
   for (i in 1:nrow(main)){
     index = (which(main$`Gene ID`[i] == mapped_CHR$gene_id))
-    if (length(index) == 1)
-    {main[i,4] <- as.character(mapped_CHR$chromosome[index])}
+    if (length(index) >= 1)
+    {main[i,4] <- as.character(mapped_CHR$chromosome[index][1])}
     else {main[i,4] <- NA}
   }
   colnames(main)[4] <- "Chr"
@@ -35,7 +35,7 @@ manhattan.object <- function(input){
   mapped_CHRLOC <- as.data.frame(org.Hs.egCHRLOC[mappedkeys(org.Hs.egCHRLOC)])
   for (i in 1:nrow(main)){
     index = as.numeric(which(main$`Gene ID`[i] == mapped_CHRLOC$gene_id))
-    if (length(index) == 1)
+    if (length(index) >= 1)
     {main[i,5] <- abs(mapped_CHRLOC$start_location[index][1])}
     else {main[i,5] <- NA}
   }
@@ -45,7 +45,7 @@ manhattan.object <- function(input){
   mapped_CHRLOCEND <- as.data.frame(org.Hs.egCHRLOCEND[mappedkeys(org.Hs.egCHRLOCEND)])
   for (i in 1:nrow(main)){
     index = as.numeric(which(main$`Gene ID`[i] == mapped_CHRLOCEND$gene_id))
-    if (length(index) == 1)
+    if (length(index) >= 1)
     {main[i,6] <- abs(mapped_CHRLOCEND$end_location[index][1])}
     else {main[i,6] <- NA}
   }

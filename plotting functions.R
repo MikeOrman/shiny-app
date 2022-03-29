@@ -254,7 +254,7 @@ gleason.barplot <- function(input){
     colnames(stats) <- c(".y.", "group1", "group2", "p")
     print((ggplot(data, aes(`mRNA Expression`)) + geom_bar(aes(fill=`Risk Group`)) 
            + labs(title = "Primary Subtype Patients", x = paste(gene, "mRNA Expression"), y = "Count")
-           + ylim(0,(nrow(data)+5)) + stat_pvalue_manual(stats, label = "p", y.position = 23)))
+           + ylim(0,(nrow(data)*.60)) + stat_pvalue_manual(stats, label = "p", y.position = 23)))
   }
   dev.off()
 }

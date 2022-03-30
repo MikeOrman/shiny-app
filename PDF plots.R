@@ -107,7 +107,6 @@ input <- summary.full
     fit <- survival::survfit(surv_object ~ Group, data = surv_data)
     fit.WT <- survival::survfit(surv_object.WT ~ Group, data = surv_data.WT)
     print((ggsurvplot(fit, pval = TRUE, pval.method = TRUE,
-                      conf.int = TRUE,
                       risk.table = TRUE,
                       palette = c("#E7B800", "#2E9FDF"),
                       risk.table.y.text = FALSE,
@@ -115,7 +114,6 @@ input <- summary.full
                       xlab = "Months",
                       title = "Primary Subtype Patients")))
     print((ggsurvplot(fit.WT, pval = TRUE, pval.method = TRUE,
-                      conf.int = TRUE,
                       risk.table = TRUE,
                       palette = c("#E7B800", "#2E9FDF"),
                       risk.table.y.text = FALSE,

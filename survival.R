@@ -34,9 +34,9 @@ survival <- function(input){
     }
     # Order dataset by gene expression. Subset into high and low expressors
     data <- data[order(data$Expression, decreasing = TRUE),]
-    # Stratify patients into n=3 quantiles.
-    quantiles <- quantile(data$Expression, c(0.5))
-    high.expressing <- data[data$Expression > quantiles[1],]
+    # Stratify patients into n=2 quantiles.
+    quantiles <- quantile(data$Expression, 0.50)
+    high.expressing <- data[data$Expression >= quantiles[1],]
     high.expressing[,5] <- "High Expressors"
     colnames(high.expressing)[5] <- "Group"
     low.expressing <- data[data$Expression <= quantiles[1],]
@@ -50,9 +50,9 @@ survival <- function(input){
     surv_data$`DFS Status` <- as.numeric(surv_data$`DFS Status`)
     # Compute survival statistics
     surv_object <- Surv(time = surv_data$`DFS Months`, event = surv_data$`DFS Status`)
-    test <- survdiff(surv_object ~ Group, data = surv_data)
+    test <- survdiff(surv_object ~ Group, data = surv_data, rho = 0)
     chisq <- test$chisq
-    pval <- pchisq(chisq, 1)
+    pval <- pchisq(chisq, length(test$n)-1, lower.tail = FALSE)
     input[k,last.col] <- pval
   }
   colnames(input)[last.col] <- "Survival pval"

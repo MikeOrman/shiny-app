@@ -40,6 +40,8 @@ karyoplots <- function(input){
         kp <- kpPlotManhattan(karyoplot = plotKaryotype(plot.type = 2), 
                               data = mp,
                               points.col = "Navy",
+                              highlight = gene,
+                              highlight.col = "red",
                               genomewide.col = "white",
                               suggestive.col = "white")
         kpText(kp, mp.label, labels = names(mp.label), y = 1)
